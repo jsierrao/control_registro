@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import registro.model.Estudiante;
 import registro.response.Response;
 import registro.service.EstudianteService;
-import registro.service.IEstudiantePage;
+
 
 @RestController
 public class EstudianteController {
@@ -28,7 +28,7 @@ public class EstudianteController {
 	@Autowired
 	private EstudianteService service;
 	
-	private IEstudiantePage pag;
+
 
 	@GetMapping("/lista")
 	public List<Estudiante> lista() {
@@ -39,7 +39,7 @@ public class EstudianteController {
 	@GetMapping("/lista/page/{page}")
 	public Page<Estudiante> lista(@PathVariable Integer page) { 
 		Pageable  pag = PageRequest.of(page, 4);
-		return service.findAll(pag);
+		return (Page<Estudiante>) service.findAll(pag);
 
 	}
 	

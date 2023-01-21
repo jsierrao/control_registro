@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,19 @@ import org.springframework.transaction.annotation.Transactional;
 import registro.model.Estudiante;
 
 import registro.repositorio.EstudianteRepository;
-import registro.repositorio.PageEstudiante;
+
 import registro.response.Response;
 import registro.service.EstudianteService;
-import registro.service.IEstudiantePage;
+
 
 
 @Service
-public class EstudianteServiceImp implements EstudianteService,IEstudiantePage {
+public class EstudianteServiceImp implements EstudianteService {
 
 	@Autowired
 	EstudianteRepository repo;
 	
-	@Autowired
-	PageEstudiante pageable;
+	
 
 	@Override
 	public Estudiante crear(Estudiante estudiante) {

@@ -24,6 +24,6 @@ public interface EstudianteService {
 
 	public Estudiante actualizar(Estudiante estudiante);
 	
-	public Page findAll(Pageable page);
+	public Page<?> findAll(Pageable page);
 
 }
