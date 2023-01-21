@@ -4,15 +4,21 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import registro.model.DocumentoIdentidad;
+
 import registro.model.Estudiante;
 @Repository
 public interface EstudianteRepository extends JpaRepository<Estudiante, Long> {
 	
 	
+	@Query(value ="select * from registro_alumno where numero_documento = :numeroDocumento",nativeQuery = true)
+	List<Estudiante>buscarDocumento(@Param("numeroDocumento")Integer numeroDocumento );
 	
 	
+	@Query(value ="select * from registro_alumno where estado = :estado",nativeQuery = true)
+	List<Estudiante>buscarEstado(@Param("estado")String estado);
 
 }
