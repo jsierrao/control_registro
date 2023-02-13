@@ -15,7 +15,7 @@ public interface EstudianteRepository extends JpaRepository<Estudiante, Long> {
 	
 	
 	@Query(value ="select * from registro_alumno where numero_documento = :numeroDocumento",nativeQuery = true)
-	List<Estudiante>buscarDocumento(@Param("numeroDocumento")Integer numeroDocumento );
+	List<Estudiante>buscarDocumento(@Param("numeroDocumento")Integer numeroDocumento);
 	
 	
 	@Query(value ="select * from registro_alumno where estado = :estado",nativeQuery = true)

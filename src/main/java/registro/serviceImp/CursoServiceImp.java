@@ -1,6 +1,7 @@
 package registro.serviceImp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,17 @@ public class CursoServiceImp implements CursoService {
 	@Override
 	public Curso crear(Curso curso) {
          return repo.save(curso);
+	}
+
+	@Override
+	public void delete(Curso curso) {
+		 repo.delete(curso);
+	}
+
+	@Override
+	public Curso cursoId(Long id) {
+		
+	return repo.findById(id).orElse(null);
 	}
 
 }

@@ -2,6 +2,9 @@ package registro.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +28,7 @@ public class Curso {
 
 	private Long id;
 	
-	
+	@JsonInclude(value = Include.NON_NULL)
 	private String grado;
 
 }

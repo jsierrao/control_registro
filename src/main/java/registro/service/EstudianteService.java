@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import registro.model.Estudiante;
+import registro.model.EstudianteDto;
 import registro.response.Response;
 
 @Primary
@@ -21,8 +22,14 @@ public interface EstudianteService {
 	public List<Estudiante> findAll();
 
 	public Response findByIdentidad(Integer numeroDocumento);
+	
+	public Estudiante actualizarPorId(Long id);
+	
+	Estudiante porId(Long id);
 
-	public Estudiante actualizar(Estudiante estudiante);
+	
+	public EstudianteDto dto();
+	
 	
 	public Page<?> findAll(Pageable page);
 

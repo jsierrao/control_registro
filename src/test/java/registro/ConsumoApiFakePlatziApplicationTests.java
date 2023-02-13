@@ -3,6 +3,7 @@ package registro;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,8 +32,8 @@ class ConsumoApiFakePlatziApplicationTests {
 				.segundoApellido("ortega")
 				.estado("activo")
 				.numeroDocumento(123455)
-				.tipoDocumento(DocumentoIdentidad.builder().id(1l).tipo("cedula").build())
-				.curso(Curso.builder().id(1l).grado("primero").build())
+				//.tipoDocumento(DocumentoIdentidad.builder().id(1l))
+				//.curso(Curso.builder().id(1l).grado("primero").build())
 				.createAt(new Date()).build();
 		Estudiante stu = rpo.save(estudiante);
 		

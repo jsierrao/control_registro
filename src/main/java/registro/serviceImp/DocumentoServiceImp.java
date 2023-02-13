@@ -26,4 +26,16 @@ public class DocumentoServiceImp implements DocumentoService {
 		return repo.save(docu);
 	}
 
+	@Override
+	public void eliminarDocumneto(DocumentoIdentidad docu) {
+		repo.delete(docu);
+		
+	}
+
+	@Override
+	public DocumentoIdentidad docuPorId(Long id) {
+		
+		return repo.findById(id).orElse(null);
+	}
+
 }

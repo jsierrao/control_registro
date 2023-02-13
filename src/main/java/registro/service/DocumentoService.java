@@ -10,6 +10,10 @@ public interface DocumentoService {
 	
 	public DocumentoIdentidad crear(DocumentoIdentidad docu);
 	
+	public void eliminarDocumneto(DocumentoIdentidad docu);
+	
+	public DocumentoIdentidad docuPorId(Long id);
+	
 	
 
 }

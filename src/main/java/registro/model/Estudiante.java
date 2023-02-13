@@ -1,8 +1,10 @@
 package registro.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,10 +44,13 @@ public class Estudiante {
 	private String segundoApellido;
 	
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_identidad")
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	private DocumentoIdentidad tipoDocumento;
+	
+	//private String tipoDocumento;
 	
 	private Integer numeroDocumento;
 	
@@ -55,11 +60,13 @@ public class Estudiante {
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	private Curso curso;
 	
+	//private String curso;
 
 	private String estado;
 	
 	@Column(name = "fecha_de_registro")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonProperty(value = "fecha")
 	private Date createAt;
 	
 	
