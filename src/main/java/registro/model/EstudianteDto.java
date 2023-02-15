@@ -1,9 +1,13 @@
 package registro.model;
 
 
-import java.util.List;
+import java.sql.Date;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +25,17 @@ public class EstudianteDto {
 
 	private String segundoApellido;
 
-	private List<DocumentoIdentidad> tipoDocumento;
+	private DocumentoIdentidad tipoDocumento;
 
 	private Integer numeroDocumento;
 
-	private List<Curso> curso;
+	private Curso curso;
 
 	private String estado;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonProperty(value = "fecha")
+	private Date createAt;
 
 	
 

@@ -24,7 +24,7 @@ class ConsumoApiFakePlatziApplicationTests {
 	EstudianteRepository rpo;
 
 	@Test
-	void crearEstudiante() {
+	void crearEstudianteTest() {
 		Estudiante estudiante = Estudiante.builder()
 				.primerNombre("julio")
 				.segundoNombre("mario")
@@ -32,18 +32,13 @@ class ConsumoApiFakePlatziApplicationTests {
 				.segundoApellido("ortega")
 				.estado("activo")
 				.numeroDocumento(123455)
-				//.tipoDocumento(DocumentoIdentidad.builder().id(1l))
+				//.tipoDocumento(DocumentoIdentidad.builder().id(1l).tipo("cedula"));
 				//.curso(Curso.builder().id(1l).grado("primero").build())
 				.createAt(new Date()).build();
 		Estudiante stu = rpo.save(estudiante);
 		
     
-		
-		
-		
-		
-				
-				
+			
 		
 		
 	}

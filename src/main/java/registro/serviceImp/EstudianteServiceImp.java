@@ -2,7 +2,7 @@ package registro.serviceImp;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,14 +12,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import static registro.model.Util.*;
+
+
 import lombok.extern.slf4j.Slf4j;
 import registro.model.Curso;
 import registro.model.DocumentoIdentidad;
 import registro.model.Estudiante;
 import registro.model.EstudianteDto;
-import registro.model.Util;
+import registro.model.Mapeador;
+
 import registro.repositorio.CursoRepository;
 import registro.repositorio.DocumentoRepository;
 import registro.repositorio.EstudianteRepository;
@@ -28,8 +31,11 @@ import registro.response.Response;
 import registro.service.EstudianteService;
 
 @Service
-
+@Slf4j
 public class EstudianteServiceImp implements EstudianteService {
+
+	@Autowired
+	Mapeador map;
 
 	@Autowired
 	EstudianteRepository repo;
@@ -41,10 +47,27 @@ public class EstudianteServiceImp implements EstudianteService {
 	DocumentoRepository docu;
 
 	@Override
-	public Estudiante crear(Estudiante estudiante) {
+	public void crear(Estudiante estudiante) {
 		estudiante.setCreateAt(new Date());
-		return repo.save(estudiante);
+		repo.save(estudiante);
 
+	}
+
+	@Override
+	public Estudiante actualizar(Estudiante estu, @PathVariable Long id) {
+		log.info("validaicon por id : {}", repo.findById(id));
+		Estudiante stu = porId(id);
+		stu.setPrimerNombre(estu.getPrimerNombre());
+		stu.setSegundoNombre(estu.getSegundoNombre());
+		stu.setPrimerApellido(estu.getPrimerApellido());
+		stu.setSegundoApellido(estu.getSegundoApellido());
+		stu.setTipoDocumento(estu.getTipoDocumento());
+		stu.setNumeroDocumento(estu.getNumeroDocumento());
+		stu.setCurso(estu.getCurso());
+		stu.setEstado(estu.getEstado());
+		stu.setCreateAt(estu.getCreateAt());
+		crear(stu);
+		return stu;
 	}
 
 	@Override
@@ -64,28 +87,14 @@ public class EstudianteServiceImp implements EstudianteService {
 	}
 
 	@Override
-	public Response findByIdentidad( Integer numeroDocumento) {
-
-		/*
-		 * Response rsp = new Response(); if (tpDoc.equalsIgnoreCase(CC)) { tpDoc =
-		 * "cedula ciudadania"; } else if (tpDoc.equalsIgnoreCase(CE)) { tpDoc =
-		 * "cedula extranjeria"; } else if (tpDoc.equalsIgnoreCase(PSP)) { tpDoc =
-		 * "pasaporte"; } else if (tpDoc.equalsIgnoreCase(RC)) { tpDoc =
-		 * "registro civil"; } else if (tpDoc.equalsIgnoreCase(TI)) { tpDoc =
-		 * "tarjeta de identidad"; } else { throw new
-		 * IllegalArgumentException("tipo de docuemento invalido: " + tpDoc);
-		 * 
-		 * }
-		 */
-		
+	public Response findByIdentidad(Integer numeroDocumento) {
 		Response rsp = new Response();
-		if(numeroDocumento != null) {
-
-		List<Estudiante> query = repo.buscarDocumento(numeroDocumento);
-
-		rsp.setCode("200");
-		rsp.setMessage("operacion exitosa");
-		rsp.setEstudiante(query);}
+		if (numeroDocumento != null) {
+			List<Estudiante> query = repo.buscarDocumento(numeroDocumento);
+			rsp.setCode("200");
+			rsp.setMessage("operacion exitosa");
+			rsp.setEstudiante(query);
+		}
 
 		return rsp;
 
@@ -118,14 +127,9 @@ public class EstudianteServiceImp implements EstudianteService {
 	}
 
 	@Override
-	public Estudiante actualizarPorId(Long id) {
-		return repo.findById(id).orElse(null);
-	}
-
-	@Override
 	public EstudianteDto dto() {
-		List<Curso> cur = curso.findAll();
-		List<DocumentoIdentidad> doc = docu.findAll();
+		Curso cur = (Curso) curso.findAll();
+		DocumentoIdentidad doc = (DocumentoIdentidad) docu.findAll();
 		EstudianteDto stu = new EstudianteDto();
 		stu.setCurso(cur);
 		stu.setTipoDocumento(doc);
@@ -135,8 +139,12 @@ public class EstudianteServiceImp implements EstudianteService {
 
 	@Override
 	public Estudiante porId(Long id) {
-		
 		return repo.findById(id).orElse(null);
+	}
+
+	@Override
+	public void eliminar(Estudiante stu) {
+		repo.delete(stu);
 	}
 
 }

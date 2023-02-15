@@ -1,7 +1,7 @@
 package registro.model;
 
 import java.util.Date;
-import java.util.List;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import registro.model.DocumentoIdentidad.DocumentoIdentidadBuilder;
 
 @Entity
 @Data
@@ -29,46 +30,36 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "registro_alumno")
 public class Estudiante {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String primerNombre;
-	
+
 	private String segundoNombre;
-	
+
 	private String primerApellido;
-	
+
 	private String segundoApellido;
-	
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_identidad")
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	private DocumentoIdentidad tipoDocumento;
-	
-	//private String tipoDocumento;
-	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private DocumentoIdentidadBuilder tipoDocumento;
+
 	private Integer numeroDocumento;
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_curso")
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Curso curso;
-	
-	//private String curso;
 
 	private String estado;
-	
+
 	@Column(name = "fecha_de_registro")
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonProperty(value = "fecha")
 	private Date createAt;
-	
-	
 
 }

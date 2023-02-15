@@ -1,10 +1,9 @@
 package registro.model;
 
 
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
